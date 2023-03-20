@@ -42,19 +42,32 @@ const App = ({ signOut }) => {
 
   async function createNote(event) {
     event.preventDefault();
+
     const form = new FormData(event.target);
+    const name = form.get("name");
+    const description = form.get("description");
     const image = form.get("image");
-    const data = {
-      name: form.get("name"),
-      description: form.get("description"),
-      image: image.name,
-    };
-    if (!!data.image) await Storage.put(data.name, image);
+
+    if (!image) {
+      return;
+    }
+
+    // Limit image file size to 5MB
+    if (image.size > 5 * 1024 * 1024) {
+      alert("Please choose an image that is less than 5MB.");
+      return;
+    }
+
+    const imageName = image.name;
+    await Storage.put(name, image);
+
+    const data = { name, description, image: imageName };
     await API.graphql({
       query: createNoteMutation,
       variables: { input: data },
     });
-    fetchNotes();
+
+    await fetchNotes();
     event.target.reset();
   }
 
@@ -99,6 +112,7 @@ const App = ({ signOut }) => {
           name="image"
           as="input"
           type="file"
+          accept="image/*"
           style={{ alignSelf: "end", marginTop: "10px" }}
         />
       </View>
