@@ -1,10 +1,8 @@
-# Getting Started with Create React App
+# AWS hosted React app with GraphQL, S3 storage and Authentification
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## A simple note taking app that allows creating notes, deleting notes
 
-## Available Scripts
-
-In the project directory, you can run:
+Allows uploading of images to an s3 bucket.
 
 ### `npm start`
 
