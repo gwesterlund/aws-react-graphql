@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "awsreactgraphql55973f1d": {}
+      },
+      "api": {
+        "awsreactgraphql": {}
+      },
+      "storage": {
+        "reactgraphqlS3": {}
       }
     }
   }
